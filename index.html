@@ -53,13 +53,8 @@
     <div class="container">
         <h2>Feedback Form</h2>
         <form id="feedbackForm">
-            <label>Your I no</label>
-            <div class="radio-group">
-                <input type="radio" id="q1_yes" name="q1" value="Yes" required>
-                <label for="q1_yes">Yes</label>
-                <input type="radio" id="q1_no" name="q1" value="No" required>
-                <label for="q1_no">No</label>
-            </div>
+            <label for="q1">Your I No</label>
+            <input type="text" id="q1" name="q1" pattern="[A-Za-z0-9]{8}" required>
             
             <label>Did you like the session</label>
             <div class="radio-group">
@@ -83,32 +78,27 @@
 
     <script>
         document.getElementById("feedbackForm").addEventListener("submit", function(event) {
-            alert("Thank you for your feedback!");
-            document.getElementById("submitButton").disabled = true;
+            event.preventDefault(); // Prevent default form submission
+
+            let formData = {
+                q1: document.getElementById("q1").value,
+                q2: document.querySelector('input[name="q2"]:checked').value,
+                q3: document.querySelector('input[name="q3"]:checked').value
+            };
+
+            fetch("https://script.google.com/macros/s/AKfycby8kRquGrwrRp2WwQS2cC6LvvpTqHX7rfH8zWUrFdhBEVY-cAdnGofx-eaj-9vo-Qk/exec", {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            }).then(() => {
+                alert("Thank you for your feedback!");
+                document.getElementById("submitButton").disabled = true;
+            }).catch(error => console.error("Error:", error));
         });
-      
-    document.getElementById("feedbackForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent default form submission
-
-        let formData = {
-            q1: document.querySelector('input[name="q1"]:checked').value,
-            q2: document.querySelector('input[name="q2"]:checked').value,
-            q3: document.querySelector('input[name="q3"]:checked').value
-        };
-
-        fetch("https://script.google.com/macros/s/AKfycby8kRquGrwrRp2WwQS2cC6LvvpTqHX7rfH8zWUrFdhBEVY-cAdnGofx-eaj-9vo-Qk/exec", {
-            method: "POST",
-            mode: "no-cors",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData)
-        }).then(() => {
-            alert("Thank you for your feedback!");
-            document.getElementById("submitButton").disabled = true;
-        }).catch(error => console.error("Error:", error));
-    });
-</script>
+    </script>
 
 </body>
 </html>
