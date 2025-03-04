@@ -84,9 +84,9 @@
 
             // Check uniqueness by retrieving previous entries
 
-         //   fetch("https://script.google.com/macros/s/AKfycbw8yH4HEOaj9tCMN71ic-BTAbEzlxPLDSCTdosPjp5mVSVyMqMT9PVXFD8ZnExbA4uF/exec", { method: "GET", redirect: "follow" })
+           // fetch("https://script.google.com/macros/s/AKfycbw8yH4HEOaj9tCMN71ic-BTAbEzlxPLDSCTdosPjp5mVSVyMqMT9PVXFD8ZnExbA4uF/exec", { method: "GET", redirect: "follow" })
 
-            fetch("https://script.google.com/macros/s/AKfycbw8yH4HEOaj9tCMN71ic-BTAbEzlxPLDSCTdosPjp5mVSVyMqMT9PVXFD8ZnExbA4uF/exec")
+/*             fetch("https://script.google.com/macros/s/AKfycbw8yH4HEOaj9tCMN71ic-BTAbEzlxPLDSCTdosPjp5mVSVyMqMT9PVXFD8ZnExbA4uF/exec")
                 .then(response => response.json())
                 .then(data => {
                     let existingEntries = data.map(entry => entry.q1);
@@ -97,7 +97,7 @@
                             q1: q1Value,
                             q2: document.querySelector('input[name="q2"]:checked').value,
                             q3: document.querySelector('input[name="q3"]:checked').value
-                        };
+                        }; */
 
                         fetch("https://script.google.com/macros/s/AKfycbw8yH4HEOaj9tCMN71ic-BTAbEzlxPLDSCTdosPjp5mVSVyMqMT9PVXFD8ZnExbA4uF/exec", {
                             method: "POST",
