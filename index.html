@@ -83,7 +83,7 @@
             let q1Value = document.getElementById("q1").value;
 
             // Check uniqueness by retrieving previous entries
-            fetch("https://script.google.com/macros/s/AKfycby8kRquGrwrRp2WwQS2cC6LvvpTqHX7rfH8zWUrFdhBEVY-cAdnGofx-eaj-9vo-Qk/exec")
+            fetch("https://script.google.com/macros/s/AKfycbwvLaLQTOWQslijwznhVUxlpMlqA4FXMsAauG2lnRsMKQM4K63f6Ma2CQR-37NReLHy/exec")
                 .then(response => response.json())
                 .then(data => {
                     let existingEntries = data.map(entry => entry.q1);
