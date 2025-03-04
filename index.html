@@ -76,44 +76,48 @@
         </form>
     </div>
 
-    <script>
-        document.getElementById("feedbackForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent default form submission
+   <script>
+    document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent default form submission
 
-            let q1Value = document.getElementById("q1").value;
+        let q1Value = document.getElementById("q1").value.trim();
+        let q2Value = document.querySelector('input[name="q2"]:checked');
+        let q3Value = document.querySelector('input[name="q3"]:checked');
 
-            // Check uniqueness by retrieving previous entries
+        // Ensure Q1 is exactly 7 characters and alphanumeric
+        let q1Pattern = /^[A-Za-z0-9]{7}$/;
+        if (!q1Pattern.test(q1Value)) {
+            alert("Q1 must be exactly 7 alphanumeric characters.");
+            return;
+        }
 
-           // fetch("https://script.google.com/macros/s/AKfycbw8yH4HEOaj9tCMN71ic-BTAbEzlxPLDSCTdosPjp5mVSVyMqMT9PVXFD8ZnExbA4uF/exec", { method: "GET", redirect: "follow" })
+        // Ensure all questions are answered
+        if (!q1Value || !q2Value || !q3Value) {
+            alert("Please answer all questions before submitting.");
+            return;
+        }
 
-/*             fetch("https://script.google.com/macros/s/AKfycbw8yH4HEOaj9tCMN71ic-BTAbEzlxPLDSCTdosPjp5mVSVyMqMT9PVXFD8ZnExbA4uF/exec")
-                .then(response => response.json())
-                .then(data => {
-                    let existingEntries = data.map(entry => entry.q1);
-                    if (existingEntries.includes(q1Value)) {
-                        alert("This ID has already been used. Please enter a unique ID.");
-                    } else {
-                        let formData = {
-                            q1: q1Value,
-                            q2: document.querySelector('input[name="q2"]:checked').value,
-                            q3: document.querySelector('input[name="q3"]:checked').value
-                        }; */
+        let formData = {
+            q1: q1Value,
+            q2: q2Value.value,
+            q3: q3Value.value
+        };
 
-                        fetch("https://script.google.com/macros/s/AKfycbw8yH4HEOaj9tCMN71ic-BTAbEzlxPLDSCTdosPjp5mVSVyMqMT9PVXFD8ZnExbA4uF/exec", {
-                            method: "POST",
-                            mode: "no-cors",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify(formData)
-                        }).then(() => {
-                            alert("Thank you for your feedback!");
-                            document.getElementById("submitButton").disabled = true;
-                        }).catch(error => console.error("Error:", error));
-                    }
-                })
-                .catch(error => console.error("Error fetching existing data:", error));
-        });
-    </script>
+        // Send data to Google Apps Script
+        fetch("https://script.google.com/macros/s/AKfycby8kRquGrwrRp2WwQS2cC6LvvpTqHX7rfH8zWUrFdhBEVY-cAdnGofx-eaj-9vo-Qk/exec", {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        }).then(() => {
+            alert("Thank you for your feedback!");
+            document.getElementById("submitButton").disabled = true;
+        }).catch(error => console.error("Error:", error));
+    });
+</script>
+
+
 </body>
 </html>
