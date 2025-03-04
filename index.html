@@ -83,7 +83,7 @@
             let q1Value = document.getElementById("q1").value;
 
             // Check uniqueness by retrieving previous entries
-            fetch("https://script.google.com/macros/s/AKfycbwvLaLQTOWQslijwznhVUxlpMlqA4FXMsAauG2lnRsMKQM4K63f6Ma2CQR-37NReLHy/exec")
+            fetch("https://script.google.com/macros/s/AKfycbw8yH4HEOaj9tCMN71ic-BTAbEzlxPLDSCTdosPjp5mVSVyMqMT9PVXFD8ZnExbA4uF/exec")
                 .then(response => response.json())
                 .then(data => {
                     let existingEntries = data.map(entry => entry.q1);
@@ -96,7 +96,7 @@
                             q3: document.querySelector('input[name="q3"]:checked').value
                         };
 
-                        fetch("https://script.google.com/macros/s/AKfycbwvLaLQTOWQslijwznhVUxlpMlqA4FXMsAauG2lnRsMKQM4K63f6Ma2CQR-37NReLHy/exec", {
+                        fetch("https://script.google.com/macros/s/AKfycbw8yH4HEOaj9tCMN71ic-BTAbEzlxPLDSCTdosPjp5mVSVyMqMT9PVXFD8ZnExbA4uF/exec", {
                             method: "POST",
                             mode: "no-cors",
                             headers: {
