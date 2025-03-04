@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dcom 2025 Demo 443 : Feedback</title>
+     <title>Dcom 2025 Demo 443 : Feedback</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,7 +51,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>Dcom 2025 Demo 443 : Feedback</h2>
+        <h2>Feedback Form</h2>
         <form id="feedbackForm">
             <label for="q1">Your I No</label>
             <input type="text" id="q1" name="q1" pattern="[A-Za-z0-9]{7}" required>
@@ -76,7 +76,7 @@
         </form>
     </div>
 
-   <script>
+<script>
     document.getElementById("feedbackForm").addEventListener("submit", function(event) {
         event.preventDefault(); // Prevent default form submission
 
@@ -97,13 +97,27 @@
             return;
         }
 
-        let formData = {
-            q1: q1Value,
-            q2: q2Value.value,
-            q3: q3Value.value
-        };
+        // Check if Q1 is unique by fetching existing values from Google Apps Script
+        fetch("https://script.google.com/macros/s/AKfycbw8yH4HEOaj9tCMN71ic-BTAbEzlxPLDSCTdosPjp5mVSVyMqMT9PVXFD8ZnExbA4uF/exec?action=getData")
+            .then(response => response.json())
+            .then(data => {
+                let existingEntries = data.map(entry => entry.q1.toLowerCase()); // Normalize case
 
-        // Send data to Google Apps Script
+                if (existingEntries.includes(q1Value.toLowerCase())) {
+                    alert("This ID has already been used. Please enter a unique ID.");
+                } else {
+                    submitFeedback(q1Value, q2Value.value, q3Value.value);
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching existing data:", error);
+                alert("Could not verify uniqueness. Please try again.");
+            });
+    });
+
+    function submitFeedback(q1, q2, q3) {
+        let formData = { q1, q2, q3 };
+
         fetch("https://script.google.com/macros/s/AKfycbw8yH4HEOaj9tCMN71ic-BTAbEzlxPLDSCTdosPjp5mVSVyMqMT9PVXFD8ZnExbA4uF/exec", {
             method: "POST",
             mode: "no-cors",
@@ -115,8 +129,9 @@
             alert("Thank you for your feedback!");
             document.getElementById("submitButton").disabled = true;
         }).catch(error => console.error("Error:", error));
-    });
+    }
 </script>
+
 
 
 </body>
