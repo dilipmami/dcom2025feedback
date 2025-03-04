@@ -101,7 +101,7 @@
         fetch("https://script.google.com/macros/s/AKfycbw8yH4HEOaj9tCMN71ic-BTAbEzlxPLDSCTdosPjp5mVSVyMqMT9PVXFD8ZnExbA4uF/exec?action=getData")
             .then(response => response.json())
             .then(data => {
-                let existingEntries = data.map(entry => entry.q1.toLowerCase()); // Normalize case
+                let existingEntries = data.map(entry => entry.q3.toLowerCase()); // Normalize case
 
                 if (existingEntries.includes(q1Value.toLowerCase())) {
                     alert("This ID has already been used. Please enter a unique ID.");
