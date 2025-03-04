@@ -83,6 +83,9 @@
             let q1Value = document.getElementById("q1").value;
 
             // Check uniqueness by retrieving previous entries
+
+            fetch("https://script.google.com/macros/s/AKfycbw8yH4HEOaj9tCMN71ic-BTAbEzlxPLDSCTdosPjp5mVSVyMqMT9PVXFD8ZnExbA4uF/exec", { method: "GET", redirect: "follow" })
+
             fetch("https://script.google.com/macros/s/AKfycbw8yH4HEOaj9tCMN71ic-BTAbEzlxPLDSCTdosPjp5mVSVyMqMT9PVXFD8ZnExbA4uF/exec")
                 .then(response => response.json())
                 .then(data => {
