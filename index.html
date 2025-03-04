@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .radio-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Feedback Form</h2>
+        <form id="feedbackForm">
+            <label>Your I no</label>
+            <div class="radio-group">
+                <input type="radio" id="q1_yes" name="q1" value="Yes" required>
+                <label for="q1_yes">Yes</label>
+                <input type="radio" id="q1_no" name="q1" value="No" required>
+                <label for="q1_no">No</label>
+            </div>
+            
+            <label>Did you like the session</label>
+            <div class="radio-group">
+                <input type="radio" id="q2_yes" name="q2" value="Yes" required>
+                <label for="q2_yes">Yes</label>
+                <input type="radio" id="q2_no" name="q2" value="No" required>
+                <label for="q2_no">No</label>
+            </div>
+            
+            <label>I shall look further into my use cases to apply AI</label>
+            <div class="radio-group">
+                <input type="radio" id="q3_yes" name="q3" value="Yes" required>
+                <label for="q3_yes">Yes</label>
+                <input type="radio" id="q3_no" name="q3" value="No" required>
+                <label for="q3_no">No</label>
+            </div>
+            
+            <button type="submit" id="submitButton">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+            alert("Thank you for your feedback!");
+            document.getElementById("submitButton").disabled = true;
+        });
+      
+    document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        let formData = {
+            q1: document.querySelector('input[name="q1"]:checked').value,
+            q2: document.querySelector('input[name="q2"]:checked').value,
+            q3: document.querySelector('input[name="q3"]:checked').value
+        };
+
+        fetch("https://script.google.com/macros/s/AKfycby8kRquGrwrRp2WwQS2cC6LvvpTqHX7rfH8zWUrFdhBEVY-cAdnGofx-eaj-9vo-Qk/exec", {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        }).then(() => {
+            alert("Thank you for your feedback!");
+            document.getElementById("submitButton").disabled = true;
+        }).catch(error => console.error("Error:", error));
+    });
+</script>
+
+</body>
+</html>
